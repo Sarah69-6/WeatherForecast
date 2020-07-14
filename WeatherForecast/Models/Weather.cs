@@ -7,9 +7,11 @@ namespace WeatherForecast.Models
 {
     public class Weather
     {
-        public DateTime applicable_date { get; set; }
-        public string weather_state_name { get; set; }
-        public string Image { get; set; }
+        public long Id { get; set; }
+        public DateTime Applicable_date { get; set; }
+        public string Weather_state_name { get; set; }
+        public string Weather_state_abbr { get; set; }
+        public string Icon { get; set; }
     }
    
 }

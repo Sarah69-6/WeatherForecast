@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WeatherForecast.Models.Weather>
+@{
+    ViewData["Title"] = "Weather Page";
+}
+
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <table class="table table-responsive" style="width:900px">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Applicable_date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weather_state_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weather_state_abbr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Icon)
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Applicable_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weather_state_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weather_state_abbr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Icon)
+
+                    </td>
+                </tr>
+
+            }
+
+        </table>
+    </div>
+</div> 

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +27,16 @@ namespace WeatherForecast.Controllers
             _logger = logger;
         }
 
+    
+        public ActionResult Index()
+          {
+
+            return View();
+        }
+
+
         string Baseurl = "https://www.metaweather.com/";
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> WeatherPage()
         {
             List<Weather> weathers = new List<Weather>();
             using (var client = new HttpClient())
@@ -32,7 +44,7 @@ namespace WeatherForecast.Controllers
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage message = await client.GetAsync("api/location/44418/2013/4/27/");
+                HttpResponseMessage message = await client.GetAsync("/api/location/44544/2020/7/14/");
 
                 if (message.IsSuccessStatusCode)
                 {
@@ -40,7 +52,19 @@ namespace WeatherForecast.Controllers
                     weathers = JsonConvert.DeserializeObject<List<Weather>>(WeatherResponse);
                 }
             }
-            return View(weathers);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("Image/svg"));
+                HttpResponseMessage message = await client.GetAsync("/static/img/weather/s.svg");
+
+                if (message.IsSuccessStatusCode)
+                {
+                    message.Content.Headers.ContentType = new MediaTypeHeaderValue("Image/svg");
+                }
+                return View(weathers);
+            }
         }
 
         public ActionResult Privacy()
