@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿var Validation = (function () {
+    var regId = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var password = /^\d+$/;
 
-// Write your JavaScript code.
+    var isRegId = function (reg) {
+        return regId.test(reg);
+    };
+    var password = function (pass) {
+        return password.test(pass);
+    };
+    var isRequire = function (value) {
+        return value == "";
+    };
+    return {
+        isRegId: isRegId,
+        isRequire: isRequire,
+    };
+})();
+
+var regId = $('form').find('[data-RegId]');
+var password = $('form').find('[data-Password]');
+ 

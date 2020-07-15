@@ -1,0 +1,30 @@
+﻿@model WeatherForecast.Models.Registeration
+@{
+    ViewBag.Title = "Reg";
+}
+
+<div>
+    Are you already registered? <a asp-controller="Home" asp-action="Login">Go to Login</a>
+</div>
+
+@using (Html.BeginForm("SaveReg", "Home"))
+{
+    <div class="form-group">
+        @Html.Label("User Id:")
+        @Html.TextBox("RegId", new { @class = "RegId form-control", name = "RegId", data= "RegId" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Name:")
+        @Html.TextBox("Name", new { @class = "Name form-control", name = "Name" })
+    </div>
+    <div class="form-group">
+        @Html.Label("UserName:")
+        @Html.TextBox("UserName", new { @class = "UserName form-control", name = "UserName" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Password:")
+        @Html.TextBox("Password", new { @class = "Password form-control", name = "Password", data = "Password" })
+        </div>
+
+        <input type="submit" value="Save" />
+        }

@@ -1,0 +1,22 @@
+﻿@model WeatherForecast.Models.Registeration
+@{
+    ViewBag.Title = "SaveReg";
+}
+
+@using (Html.BeginForm("Login", "Home"))
+{
+    <div class=" form-group">
+        @Html.TextBox("id", (int)ViewBag.sRegId)
+    </div>
+    <div class=" form-group">
+        @Html.TextBox("nName", (string)ViewBag.sName)
+    </div>
+    <div class=" form-group">
+        @Html.TextBox("uname", (string)ViewBag.sUsername)
+    </div>
+    <div class=" form-group">
+        @Html.TextBox("pw", (string)ViewBag.sPassword)
+    </div>
+
+    <input type="submit" value="UserLogin" />
+}
