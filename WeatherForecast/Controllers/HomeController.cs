@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using WeatherForecast.Models;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using System.IO;
+using System.Linq;
 
 namespace WeatherForecast.Controllers
 {
@@ -70,37 +73,26 @@ namespace WeatherForecast.Controllers
 
 string Baseurl = "https://www.metaweather.com/";
         public async Task<ActionResult> WeatherPage()
-        {
-            List<Weather> weathers = new List<Weather>();
+        {   
+            List<Weather> weathers = new List<Weather>();         
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage message = await client.GetAsync("/api/location/44544/2020/7/14/");
-
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));               
+                    HttpResponseMessage message = await client.GetAsync("/api/location/44544/2020/7/14");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("Image/svg"));
+                 await client.GetAsync("/static/img/weather/lc.svg");
                 if (message.IsSuccessStatusCode)
                 {
                     var WeatherResponse = message.Content.ReadAsStringAsync().Result;
-                    weathers = JsonConvert.DeserializeObject<List<Weather>>(WeatherResponse);
-
-                    
+                    weathers = JsonConvert.DeserializeObject<List<Weather>>(WeatherResponse);  
                 }
             }
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("Image/svg"));
-                HttpResponseMessage message = await client.GetAsync("/static/img/weather/s.svg");
-
-                if (message.IsSuccessStatusCode)
-                {
-                    message.Content.Headers.ContentType = new MediaTypeHeaderValue("Image/svg");
-                }
+            weathers.Add(new Weather { Icon = "Image/svg" });
                 return View(weathers);
             }
-        }
+        
 
         public ActionResult Privacy()
         {

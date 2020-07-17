@@ -9,22 +9,26 @@
 
 @using (Html.BeginForm("SaveReg", "Home"))
 {
-    <div class="form-group">
-        @Html.Label("User Id:")
-        @Html.TextBox("RegId", new { @class = "RegId form-control", name = "RegId", data= "RegId" })
-    </div>
-    <div class="form-group">
-        @Html.Label("Name:")
-        @Html.TextBox("Name", new { @class = "Name form-control", name = "Name" })
-    </div>
-    <div class="form-group">
-        @Html.Label("UserName:")
-        @Html.TextBox("UserName", new { @class = "UserName form-control", name = "UserName" })
-    </div>
-    <div class="form-group">
-        @Html.Label("Password:")
-        @Html.TextBox("Password", new { @class = "Password form-control", name = "Password", data = "Password" })
-        </div>
+<div class="form-group">
+    @Html.Label("User Id:")
+    @Html.TextBoxFor(m=> m.RegId, new { @class = "RegId form-control", name = "RegId", data = "RegId" })
+   
+</div>
+<div class="form-group">
+    @Html.Label("Name:")
+    @Html.TextBoxFor(m => m.Name, new { @class = "Name form-control", name = "Name" , data ="Required" })
+ 
+</div>
+<div class="form-group">
+    @Html.Label("UserName:")
+    @Html.TextBoxFor(m => m.Username, new { @class = "UserName form-control", name = "UserName", data = "Required" })
+   
+</div>
+<div class="form-group">
+    @Html.Label("Password:")
+    @Html.TextBoxFor(m => m.Password, new { @class = "Password form-control", name = "Password", data = "Password", UseSystemPasswordChar = true })
+    
+</div>
 
         <input type="submit" value="Save" />
         }

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<WeatherForecast.Models.Weather>
 @{
     ViewData["Title"] = "Weather Page";
+
 }
 
 <div class="form-horizontal">
@@ -9,38 +10,45 @@
         <table class="table table-responsive" style="width:900px">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Applicable_date)
+                    Date
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Weather_state_name)
+                    Weather State
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Weather_state_abbr)
+                    Weather State Abbr
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Icon)
+                    Icon
                 </th>
             </tr>
+
+
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Applicable_date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Weather_state_name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Weather_state_abbr)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Icon)
-
-                    </td>
-                </tr>
-
+                @for (int Applicable_date = 0; Applicable_date < 5; Applicable_date++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem=> item.Applicable_date)
+                           
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weather_state_name)
+                          
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weather_state_abbr)
+                          
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Icon)
+                          
+                        </td>
+                    </tr>
+                }
             }
 
-        </table>
+            </table>
     </div>
 </div> 
