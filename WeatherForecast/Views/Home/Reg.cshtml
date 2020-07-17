@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Reg";
 }
+<h2>Register to view the weather</h2>
 
 <div>
     Are you already registered? <a asp-controller="Home" asp-action="Login">Go to Login</a>
@@ -11,7 +12,7 @@
 {
 <div class="form-group">
     @Html.Label("User Id:")
-    @Html.TextBoxFor(m=> m.RegId, new { @class = "RegId form-control", name = "RegId", data = "RegId" })
+    @Html.TextBoxFor(m=> m.RegId, new { @class = "RegId form-control", name = "RegId", data = "RegId, Required" })
    
 </div>
 <div class="form-group">
@@ -26,7 +27,7 @@
 </div>
 <div class="form-group">
     @Html.Label("Password:")
-    @Html.TextBoxFor(m => m.Password, new { @class = "Password form-control", name = "Password", data = "Password", UseSystemPasswordChar = true })
+    @Html.TextBoxFor(m => m.Password, new { @class = "Password form-control", name = "Password", data = "Password, Required", UseSystemPasswordChar = true })
     
 </div>
 
